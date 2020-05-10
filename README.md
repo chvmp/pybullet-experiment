@@ -17,7 +17,8 @@
     ros-core \
     ros-actionlib \
     ros-dynamic-reconfigure \
-    
+    python=3.6 
+
     conda activate bullet
 
     yes | pip install pybullet --upgrade --user
