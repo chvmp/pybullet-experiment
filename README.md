@@ -1,4 +1,4 @@
-An attempt to build a simulation environment in pybullet and run CHAMP's controller. For now, the simulation is bridged back to the ROS based controller to get the robot moving in pybullet. 
+An attempt to build a simulation environment in pybullet and run CHAMP's controller. For now, the simulation is bridged back to the ROS based controller to get the robot moving. 
 
 Ultimately, the goal is to build an RL based controller that's decoupled from ROS and can run independently without the middleware.
 
