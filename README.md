@@ -1,3 +1,7 @@
+An attempt to build a simulation environment in pybullet and run CHAMP's controller. For now, the simulation is bridged back to the ROS based controller to get the robot moving in pybullet. 
+
+Ultimately, the goal is to build an RL based controller that's decoupled from ROS and can run independently without the middleware.
+
 ## Installation
 
 - Install [miniconda](https://docs.conda.io/en/latest/miniconda.html):
@@ -25,7 +29,6 @@
     git clone https:github.com/chvmp/pybullet-experiment
 
     ```
-
 
 ## Quickstart
 
