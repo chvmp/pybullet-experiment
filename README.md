@@ -30,6 +30,8 @@ Ultimately, the goal is to build an RL based controller that's decoupled from RO
 
     ```
 
+- Download and install [Champ](https://github.com/chvmp/champ)
+
 ## Quickstart
 
 - Run CHAMP's controller:
