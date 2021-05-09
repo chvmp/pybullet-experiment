@@ -6,6 +6,7 @@ import pybullet_data
 from champ.types import Pose, GaitConfig, Velocities
 from champ.base import Base
 from champ.controllers.cheetah_one import CheetahOne
+from champ.body_controller import PoseGenerator
 from champ.kinematics import Kinematics
 
 class Champ:
@@ -53,7 +54,7 @@ class Champ:
 
         req_vel = Velocities()
         # req_vel.linear.x = 1.0
-        req_vel.linear.y = 1.0
+        # req_vel.linear.y = 1.0
         # req_vel.angular.z = 1.0
 
         self.jointPositions = []
@@ -93,7 +94,47 @@ class Champ:
                 #save the index of the that joint in the received joint name's index
                 bulletJointIndices[self.jointNames.index(jointName)] = jointIndex
 
-        while True:
+        roll_gen = PoseGenerator(0.4, 0.5)
+        pitch_gen = PoseGenerator(0.3, 0.5, phase_shift=1.5708)
+        yaw_gen = PoseGenerator(0.3, 0.5)
+        for i in range(3500):
+         
+            if i == 0:
+                print("Linear Velocity X")
+                req_vel.linear.x = 1.0
+                req_vel.linear.y = 0.0
+                req_vel.angular.z = 0.0
+            elif i == 500:
+                print("Linear Velocity Y")
+                req_vel.linear.x = 0.0
+                req_vel.linear.y = 1.0
+                req_vel.angular.z = 0.0
+            elif i == 1000:
+                print("Angular Velocity Z")
+                req_vel.linear.x = 0.0
+                req_vel.linear.y = 0.0
+                req_vel.angular.z = 1.0
+            elif i == 1500:
+                print("Turning")
+                req_vel.linear.x = 1.0
+                req_vel.linear.y = 0.0
+                req_vel.angular.z = 1.0
+            elif i == 2000:
+                print("Linear Velocity XZ")
+                req_vel.linear.x = 1.0
+                req_vel.linear.y = 1.0
+                req_vel.angular.z = 0.0
+            elif i ==  2500:
+                print("Pose Command")
+            elif i > 2500: 
+                req_vel.linear.x = 0.0
+                req_vel.linear.y = 0.0
+                req_vel.angular.z = 0.0
+                req_pose.orientation.roll = roll_gen.sine()
+                req_pose.orientation.pitch = pitch_gen.sine()
+                req_pose.orientation.yaw = yaw_gen.sine()
+
+
             foot_positions = controller.walk(req_pose, req_vel)
             joint_positions = ik.inverse(foot_positions)
 
